@@ -1,0 +1,13 @@
+Podsumowanie:
+Dane to 30241 rekordów z przedziału dat 2004-02-10 00:00:00 do 2004-03-02 00:00:00.
+Kolejne wiersze to pomiary wykonywane w interwale 1 minuta.
+Pomiary dotyczyły 13 cech z czego 12 to cechy ciągłe, a jedna to cecha symboliczna.
+
+Wnioski:
+1.Korelacje: Cecha power jest najbardziej skorelowana [dodatnio] z parametrem ciśnienia P1 - pearson=0.970596.
+Najniższy współczynnik korelacji dla cechy power występuje z cechą Ta3 - pearson=0.313973.
+Temperatury T1 i T2 oraz TaX (Ta1, Ta3..) od 1 do 8 są ze sobą bardzo wysoko skorelowane, za wyjątkiem Ta3, która widoczenie odstaje.
+Dla wartości temperatury Ta_q występuje coraz większa amplituda. Poza tym faktem nie widać zależności tej cechy z resztą systemu.
+2. W danym przedziale czasowymi miały miejsce dwie anomalie:
+ Pierwsza dotyczyła cech P1, T1, T2, power. W okolicy 5k wiersza cechy te zaczęły gwałtownie spadać, a następnie po kilku minutach wróciły do normy.
+ Druga dotyczyła wyłącznie Ta3 i wystąpiła w okolicy 25k wiersza objawiając się nagłym spadkiem wartości. Wartość do końca obserwacji nie wróciła do normy. Zmiana ta jest powiązana ze zmianą aktywności miernika v_1 z 'M' na 'S'.

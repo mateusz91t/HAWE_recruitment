@@ -1,2 +1,3 @@
 .git
 hvenv
+*__pycache__*
