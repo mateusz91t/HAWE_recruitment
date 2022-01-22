@@ -11,3 +11,4 @@ Dla wartości temperatury Ta_q występuje coraz większa amplituda. Poza tym fak
 2. W danym przedziale czasowymi miały miejsce dwie anomalie:
  Pierwsza dotyczyła cech P1, T1, T2, power. W okolicy 5k wiersza cechy te zaczęły gwałtownie spadać, a następnie po kilku minutach wróciły do normy.
  Druga dotyczyła wyłącznie Ta3 i wystąpiła w okolicy 25k wiersza objawiając się nagłym spadkiem wartości. Wartość do końca obserwacji nie wróciła do normy. Zmiana ta jest powiązana ze zmianą aktywności miernika v_1 z 'M' na 'S'.
+ W kolumnie Ta3 od początku pomiaru jest dużo pustych wartości. Być może jest to związane z anomalią nr 2.

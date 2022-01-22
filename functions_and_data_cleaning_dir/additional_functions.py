@@ -1,4 +1,7 @@
 import pandas as pd
+from matplotlib import pyplot as plt
+
+from math import ceil
 
 
 def prepare_data_frame(data_frame: pd.DataFrame) -> pd.DataFrame:
