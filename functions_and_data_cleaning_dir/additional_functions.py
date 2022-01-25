@@ -12,8 +12,15 @@ def prepare_data_frame(data_frame: pd.DataFrame) -> pd.DataFrame:
     data_frame["Ta4"] = data_frame["Ta4"].astype("str")
     data_frame["Ta4"] = data_frame["Ta4"].apply(lambda x: x.replace(",", "."))
     data_frame["Ta4"] = data_frame["Ta4"].astype("float32")
-    data_frame["Timestamp"] = pd.to_datetime(data_frame["Timestamp"])
-    data_frame.set_index(data_frame["Timestamp"], inplace=True)
+    data_frame.set_index(
+        pd.date_range(
+            pd.to_datetime(data_frame["Timestamp"].iloc[0]),
+            end=pd.to_datetime(data_frame["Timestamp"].iloc[-1]),
+            freq="1min",
+            name="Timestamp",
+        ),
+        inplace=True,
+    )
     del data_frame["Timestamp"]
     return data_frame
 
@@ -70,3 +77,17 @@ def get_surrondings_around_indexes(idxs: pd.Index, around_minutes: int = 10):
         *idxs,
         *after_max_index,
     ]
+
+
+def one_hot_encoding(
+    df: pd.DataFrame, column_to_ohe: str, multiple_vals_times: int = 50
+) -> pd.DataFrame:
+    column_types = df[column_to_ohe].unique()
+    column_categories = dict(
+        {column_types[x]: (x + 1.0) * 50 for x in range(len(column_types))}
+    )
+    df[column_to_ohe] = df[column_to_ohe].apply(
+        lambda x: column_categories[x]
+    )  # OHE
+    df[column_to_ohe] = df[column_to_ohe].astype("int16")
+    return df

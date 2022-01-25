@@ -4,12 +4,10 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
 import seaborn as sns
 
-from math import ceil
-
 from functions_and_data_cleaning_dir.additional_functions import (
     prepare_data_frame,
     draw_figure_axe_by_feature,
-    get_surrondings_around_indexes
+    get_surrondings_around_indexes,
 )
 
 
@@ -17,13 +15,8 @@ from functions_and_data_cleaning_dir.additional_functions import (
 df = pd.read_csv("df_task_final.csv")
 # clean
 df = prepare_data_frame(df)
-# one hot encoding - change to continuous values and divide data to X, y
-v_1_types = df["v_1"].unique()
-v_1_categories = dict(
-    {v_1_types[x]: (x + 1.0) * 50 for x in range(len(v_1_types))}
-)
-df["v_1"] = df["v_1"].apply(lambda x: v_1_categories[x])  # OHE
-df["v_1"] = df["v_1"].astype("int16")
+# one hot encoding - change to continuous values
+df = one_hot_encoding(df, 'v_1', 50)
 
 # each chart with nulls
 draw_figure_axe_by_feature(df, df.index)
@@ -60,10 +53,14 @@ surroundings_anomaly1 = get_surrondings_around_indexes(anomaly1_indexes)
 draw_figure_axe_by_feature(df, surroundings_anomaly1)
 
 # find anomaly2 Ta3
-anomaly2_indexes = df["Ta3"].loc[
-    (df.index > pd.Timestamp(2004, 2, 26))
-    & (df.index < pd.Timestamp(2004, 2, 28, 23, 50))
-].index
+anomaly2_indexes = (
+    df["Ta3"]
+    .loc[
+        (df.index > pd.Timestamp(2004, 2, 26))
+        & (df.index < pd.Timestamp(2004, 2, 28, 23, 50))
+    ]
+    .index
+)
 surroundigs_anomaly2 = get_surrondings_around_indexes(anomaly2_indexes)
 draw_figure_axe_by_feature(df, anomaly2_indexes)
 
@@ -71,7 +68,7 @@ draw_figure_axe_by_feature(df, anomaly2_indexes)
 df.corr()
 df.corr("spearman")
 
-fig, ax = plt.subplots(figsize=(15,10))
+fig, ax = plt.subplots(figsize=(15, 10))
 sns.heatmap(df.corr(), annot=True)
 
 # pairplot from pandas - simple & fast
