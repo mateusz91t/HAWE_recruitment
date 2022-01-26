@@ -3,11 +3,13 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
 import seaborn as sns
+import missingno as msno
 
 from functions_and_data_cleaning_dir.additional_functions import (
     prepare_data_frame,
     draw_figure_axe_by_feature,
     get_surrondings_around_indexes,
+    one_hot_encoding,
 )
 
 
@@ -16,7 +18,7 @@ df = pd.read_csv("df_task_final.csv")
 # clean
 df = prepare_data_frame(df)
 # one hot encoding - change to continuous values
-df = one_hot_encoding(df, 'v_1', 50)
+df = one_hot_encoding(df, "v_1", 50)
 
 # each chart with nulls
 draw_figure_axe_by_feature(df, df.index)
@@ -63,6 +65,8 @@ anomaly2_indexes = (
 )
 surroundigs_anomaly2 = get_surrondings_around_indexes(anomaly2_indexes)
 draw_figure_axe_by_feature(df, anomaly2_indexes)
+
+msno.heatmap(df)
 
 # data corelation
 df.corr()
